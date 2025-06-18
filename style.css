@@ -79,5 +79,26 @@ body{
 }
 
 .quote-box button{
+    background: #8f4e9c;
+    color: #fff;
+    border-radius: 25px;
+    border: 1px solid #8f4e9c;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#tweet{
+    width: 20px;
+    margin-right: 10px;
+}
+
+.quote-box button:nth-child(2){
+    background-color: transparent;
+    color: #000;
     
 }
