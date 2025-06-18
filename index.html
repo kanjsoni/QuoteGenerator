@@ -24,8 +24,10 @@
     <script>
         const quote = document.getElementById(url);
         var data = await response.json();
-        console.log(data);
+        // console.log(data);
         quote.innerHTML = data.content ;
+        author.innerHTML = data.author;
+
         const api_url = "https://zenquotes.io/api/quotes";
 
         async function getquote(url) {
