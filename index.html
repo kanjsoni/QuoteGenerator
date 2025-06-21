@@ -6,9 +6,9 @@
     <!--font-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
     <title>Document</title>
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
 </head>
 <body>
     <div class="quote-box">
@@ -16,27 +16,36 @@
         <blockquote id="quote">Loading...</blockquote>
         <span id="author">Loading...</span>
         <div>
-            <button>New Quote</button>
-            <button> <img src="./Assets/Twitter Icon.svg" alt="" id="tweet"> Tweet</button>
+            <button onclick="getquote()">New Quote</button>
+            <button onclick="tweet()"> <img src="./Assets/Twitter Icon.svg" alt="" id="tweet"> Tweet</button>
         </div>
     </div>
 
     <script>
-        const quote = document.getElementById(url);
-        var data = await response.json();
-        // console.log(data);
-        quote.innerHTML = data.content ;
-        author.innerHTML = data.author;
+         quote = document.getElementById("quote");
+        const author = document.getElementById("author");
+function getquote(){
+    $.ajax({
+    method: 'GET',
+    url: 'https://api.api-ninjas.com/v1/quotes',
+    headers: { 'X-Api-Key': 'GRhDjdbJx6xT1MNwcoEY3Q==snCIx0folPMyg3PN'},
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+         quote.innerHTML = result[0].quote;
+         author.innerHTML =result[0].author;
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+    }
+});
+}
 
-        const api_url = "https://zenquotes.io/api/quotes";
+getquote();
 
-        async function getquote(url) {
-            const response = await fetch(url);
-            var data = await response.json();
-            console.log(data);
-        }
-
-        getquote(api_url);
+function tweet(){
+    window.open(href="https://twitter.com/intent/tweet?text" + quote.innerHTML + "----- by " +author.innerHTML, "Tweet Window", "width: 500, height: 300")
+}
     </script>
 </body>
 </html>
